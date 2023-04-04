@@ -12,8 +12,8 @@ public class Testconfig  {
     // предустановка необходимых действий(задается базовы url, path)
     @BeforeClass
     public static void setUp(){
-        RestAssured.baseURI = "https://jsonplaceholder.typicode.com/" ;
-      //  RestAssured.basePath = path;
+        RestAssured.baseURI = server ;
+        RestAssured.basePath = path;
     }
 
 }
