@@ -1,17 +1,19 @@
 import config.Testconfig;
 import io.restassured.http.ContentType;
+import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 
-import static constans.Constans.Actions.PLACEHOLDER_GET4;
+import static constans.Constans.Actions.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 public class AssertionTest extends Testconfig {
 
     public String baseURI = "https://jsonplaceholder.typicode.com/";
+    public String baseURI2 = "https://3f306ecd-38e6-443b-99d6-bc43a002e08c.mock.pstmn.io/"; //mock api postman
 
-    @Test
+        @Test
         public void getAllElements(){
             given().queryParam("postId", 1).contentType(ContentType.JSON).log().uri().
                         when().get(baseURI + PLACEHOLDER_GET4).
@@ -40,6 +42,15 @@ public class AssertionTest extends Testconfig {
                                 "[4].email",containsStringIgnoringCase("hayden@althea.biz"),
                                 "[4].body",notNullValue()).log().body();
 
+        }
+
+        @Test
+        public void getNullResponse(){
+
+            given().contentType(ContentType.JSON).log().uri().
+                    when().get(baseURI2+PLACEHOLDER_GET_NULL).
+                    then().statusCode(200).log().all().
+                    body(isEmptyString()).log().all();
         }
 
     }

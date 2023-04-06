@@ -25,5 +25,8 @@ public class Constans  {
         public static String PLACEHOLDER_PUT= "posts/1";
         public static String PLACEHOLDER_POST= "posts";
 
+        public static String PLACEHOLDER_GET_NULL = "nullresponse";
+
+
     }
 }
