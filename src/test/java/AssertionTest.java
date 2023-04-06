@@ -50,7 +50,7 @@ public class AssertionTest extends Testconfig {
             given().contentType(ContentType.JSON).log().uri().
                     when().get(baseURI2+PLACEHOLDER_GET_NULL).
                     then().statusCode(200).log().all().
-                    body(isEmptyString()).log().all();
+                    body(isEmptyOrNullString()).log().all();
         }
 
     }
