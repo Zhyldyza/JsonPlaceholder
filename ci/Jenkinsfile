@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+
+    enviroment{
+    PROJECT_APP = 'JsonPlaceholder'
+    ENVIRONMENT = getEnvSettings(GIT_BRANCH)
+    GIT_HASH = GIT_COMMIT.take(7)
+    }
+
+    stages {
+        stage('Build') {
+        when{
+        anyOf{
+            branch 'main'
+            }
+        }
+            steps {
+                echo 'Building..'
+                script{
+                 last_started  = env.STAGE_NAME
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+        when{
+         anyOf{
+          branch 'master'
+         }
+        }
+            steps {
+                echo 'Deploying....'
+            script {
+                last_started = env.STAGE_NAME
+                sh 'echo ${ENVIRONMENT}'
+                dir('chart'){
+                 git branch: "main"
+                    credentialsId: 'Zhyldyza'
+                    url: 'https://github.com/Zhyldyza/JsonPlaceholder.git'
+                }
+             }
+            }
+        }
+    }
+}
