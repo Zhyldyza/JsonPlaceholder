@@ -1,12 +1,5 @@
 pipeline {
     agent any
-
-    enviroment{
-    PROJECT_APP = 'JsonPlaceholder'
-    ENVIRONMENT = getEnvSettings(GIT_BRANCH)
-    GIT_HASH = GIT_COMMIT.take(7)
-    }
-
     stages {
         stage('Build') {
         when{
