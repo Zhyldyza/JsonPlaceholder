@@ -1,22 +1,24 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('clean up') {
         when{
         anyOf{
             branch 'main'
             }
         }
             steps {
+                cleanWs()
                 echo 'Building..'
                 script{
                  last_started  = env.STAGE_NAME
                 }
             }
         }
-        stage('Test') {
+        stage('Checkout all') {
             steps {
                 echo 'Testing..'
+                userRemoteConfigs: ([credentialsId: 'Zhyldyza', url: 'https://github.com/Zhyldyza/JsonPlaceholder.git'])
             }
         }
         stage('Deploy') {
