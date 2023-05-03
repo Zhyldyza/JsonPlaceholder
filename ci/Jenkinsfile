@@ -1,7 +1,15 @@
 pipeline {
     agent any
     stages {
-        stage('clean up') {
+     stage('Checkout') {
+                steps {
+                    echo 'Testing..'
+                    git 'https://github.com/Zhyldyza/JsonPlaceholder.git'
+                    checkout scm
+                }
+            }
+
+        stage('Build') {
         when{
         anyOf{
             branch 'main'
@@ -12,14 +20,15 @@ pipeline {
                 echo 'Building..'
                 script{
                  last_started  = env.STAGE_NAME
+                 sh 'mvn clean package'
                 }
             }
         }
-        stage('Checkout all') {
-            steps {
-                echo 'Testing..'
-            }
+
+        stage('Test'){
+            sh 'mvn test'
         }
+
         stage('Deploy') {
         when{
          anyOf{
