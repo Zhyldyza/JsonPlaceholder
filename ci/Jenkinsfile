@@ -44,7 +44,7 @@ pipeline {
                     credentialsId: 'Zhyldyza'
                     url: 'https://github.com/Zhyldyza/JsonPlaceholder.git'
                 }
-             }
+              }
             }
         }
     }
