@@ -18,7 +18,6 @@ pipeline {
         stage('Checkout all') {
             steps {
                 echo 'Testing..'
-                userRemoteConfigs: ([credentialsId: 'Zhyldyza', url: 'https://github.com/Zhyldyza/JsonPlaceholder.git'])
             }
         }
         stage('Deploy') {
